@@ -17,10 +17,10 @@ public class ClientController {
     @Autowired
     private IClienteService iClienteService;
     // ResponseEntity dar respuesta con estados https 200 o 500 ejemplos
-//    @GetMapping // http verbs
-//    public List<Cliente> getAllClient(){
-//        return  null;
-//    }
+    //    @GetMapping // http verbs
+    //    public List<Cliente> getAllClient(){
+    //        return  null;
+    //    }
 
     @GetMapping
     public ResponseEntity<Cliente> getClientById(@PathVariable Long id){
@@ -37,7 +37,7 @@ public class ClientController {
 
 
     @PutMapping
-    public ResponseEntity<Cliente> updateCLient(@PathVariable Long id, @RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> updateClient(@PathVariable Long id, @RequestBody Cliente cliente){
         cliente.setId(id);
         Cliente updateClient = iClienteService.createUpdateClient(cliente);
         return  ResponseEntity.ok(updateClient);
