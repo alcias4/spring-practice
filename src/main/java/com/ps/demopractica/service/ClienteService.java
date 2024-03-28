@@ -6,6 +6,8 @@ import com.ps.demopractica.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +39,10 @@ public class ClienteService implements  IClienteService{
     @Override
     public void deleteClient(Long id) {
         clienteRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Cliente> getClientByName(String nombre) {
+        return clienteRepository.findByNombre(nombre);
     }
 }

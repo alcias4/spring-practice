@@ -1,10 +1,15 @@
 package com.ps.demopractica.model;
 
 
+
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
 
 @Entity // entidad
 @Table(name = "Clientes") //tabla de base de datos

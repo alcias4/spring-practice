@@ -1,8 +1,10 @@
 package com.ps.demopractica.controller;
 
 
+
 import com.ps.demopractica.model.Cliente;
 import com.ps.demopractica.service.IClienteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,19 +12,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController // decir que esta clase es administrida o controlada por spring
 @RequestMapping("/clientes") // agregar una ruta
 public class ClientController {
 
     @Autowired
     private IClienteService iClienteService;
-    // ResponseEntity dar respuesta con estados https 200 o 500 ejemplos
-    //    @GetMapping // http verbs
-    //    public List<Cliente> getAllClient(){
-    //        return  null;
-    //    }
 
-    @GetMapping
+    @GetMapping()
+    public ResponseEntity<List<Cliente>> getClientByName(@RequestParam String nombre){
+        List<Cliente> cliente = iClienteService.getClientByName(nombre);
+        return  ResponseEntity.ok(cliente);
+    }
+    @GetMapping("/{id}")
     public ResponseEntity<Cliente> getClientById(@PathVariable Long id){
         Cliente cliente = iClienteService.getClientById(id);
         return  ResponseEntity.ok(cliente);
@@ -37,13 +40,12 @@ public class ClientController {
 
 
     @PutMapping
-    public ResponseEntity<Cliente> updateClient(@PathVariable Long id, @RequestBody Cliente cliente){
-        cliente.setId(id);
+    public ResponseEntity<Cliente> updateClient(@RequestBody Cliente cliente){
         Cliente updateClient = iClienteService.createUpdateClient(cliente);
         return  ResponseEntity.ok(updateClient);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id){
         iClienteService.deleteClient(id);
         return  ResponseEntity.noContent().build();
